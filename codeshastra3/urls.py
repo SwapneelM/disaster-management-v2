@@ -12,14 +12,25 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    
+
+    url(r'^classify/', cviews.index, name='index'),
+    url(r'^(?P<testtweet_id>\d+)/tag/$', cviews.tag, name='tag'),
+    url(r'^analysis/(?P<keyword>.+)$', cviews.analysis_keyword, name='analysis_keyword'),
+    url(r'^analysis$', cviews.analysis_keyword, name='analysis_keyword'),
+    url(r'^map$', cviews.osmap, name='osmap'),
+
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from app import views
+from classifier import views as cviews
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home),
     url(r'^heatmap/', views.heatmap),
+    url(r'^classifier/', include('classifier.urls')),
 ]
