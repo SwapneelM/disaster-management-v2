@@ -10,6 +10,7 @@ from TwitterSearch import *
 import time
 from time import mktime
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 def get_slot(intvl, curr_time, start_time):
     i = 0
@@ -22,11 +23,14 @@ class KeywordForm(forms.Form):
     keyword = forms.CharField(max_length=100,
                               widget=forms.TextInput(attrs={'placeholder': 'Enter your keyword',
                                                             'class': 'form-control'}))
+def heatgen(request):
+    return render(request, 'classifier/heatgen.html')
 
 def osmap(request):
-    return render(request, 'osmap.html')
+    return render(request, 'classifier/osmap.html', {})
 
 # main page
+@csrf_exempt
 def index(request):
     if request.method == 'POST':
         form = KeywordForm(request.POST)
@@ -40,6 +44,7 @@ def index(request):
     return render(request, 'classifier/index.html', {
         'form': form,
         })
+
 
 def analysis_keyword(request, keyword):
     try:

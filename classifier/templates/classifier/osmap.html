@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html>
@@ -19,7 +20,7 @@
 
 
 #map1 {
-    width: 1100px;
+    width: 1400px;
     height:900px;
 }
 
@@ -44,14 +45,16 @@
 
 
 
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_admin.geojson"></script>
+<script type="text/javascript" src="{% static "chennai_india_admin.geojson" %}"></script>
 <!--<script src="https://raw.githubusercontent.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js" type="text/javascript"></script>-->
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_roads.geojson"></script>
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_amenities.geojson"></script>
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_transport_points.geojson"></script>
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_barrierways.geojson"></script>
+<script type="text/javascript" src="{% static "chennai_india_roads.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_amenities.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_transport_points.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_barrierways.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_aeroways.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_barrierpoints.geojson" %}"></script>
+<script type="text/javascript" src="{% static "chennai_india_transport_areas.geojson" %}"></script>
 <!--
-<script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_aeroways.geojson"></script>
 
 <script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_landusages.geojson"></script>
 <script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_barrierpoints.geojson"></script>
@@ -70,11 +73,6 @@
 <script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_waterareas.geojson"></script>
 <script type="text/javascript" src="/Users/swappy/Downloads/chennai_india.imposm-geojson/chennai_india_roads_gen1.geojson"></script>-->
 
-<script type="text/javascript">
-
-    //var map2 = L.map('map2',{scrollWheelZoom:true}).setView([13.100, 80.200], 12);
-    //L.geoJson(ciaeroways).addTo(map2);
-</script>
 <!--<script type="text/javascript">
 	$(document).ready(function() {
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
@@ -135,7 +133,7 @@
 });
  </script>-->
 
-<script>
+<script type="text/javascript">
 
 
     /*L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -147,7 +145,7 @@
     geojsonLayer.addTo(map);*/
 
     // parse the geojson (very simplified example here)
-//var aeroways = L.geoJson(ciaeroways, {});
+var aeroways = L.geoJson(ciaeroways, {});
 var roads = L.geoJson(ciroads, {});
 //var old_roads = L.geoJson(ciroads_gen0, {});
 //var waterways = L.geoJson(ciwaterways, {});
@@ -156,9 +154,9 @@ var transport_points = L.geoJson(citransport_points, {});
 //var places = L.geoJson(ciplaces, {});
 var amenities = L.geoJson(ciamenities, {});
 var barrierways = L.geoJson(cibarrierways, {});
-//ar barrierpoints = L.geoJson(cibarrierpoints, {});
+var barrierpoints = L.geoJson(cibarrierpoints, {});
 //var buildings = L.geoJson(cibuildings, {});
-//var transport_areas = L.geoJson(citransport_areas, {});
+var transport_areas = L.geoJson(citransport_areas, {});
 
 // from there, similar to the example: 
 var maplayers = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {});
@@ -177,14 +175,14 @@ var baseMaps = {
 
 var overlayMaps = {
     "Roads": roads,
-//    "Aeroways": aeroways,
+    "Aeroways": aeroways,
 //    "Waterways" : waterways,
     "Amenities" : amenities,
     "Barrierways" : barrierways,
 //    "Transport Areas" : transport_areas,
 //    "Buildings" : buildings,
 //    "Landusages" : landusages,
-//    "Barrier points" : barrierpoints,
+    "Barrier points" : barrierpoints,
     "Transport Points" : transport_points
 //    "Places" : places,
 //    "Old Routes" : old_roads
